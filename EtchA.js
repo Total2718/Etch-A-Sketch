@@ -2,7 +2,7 @@
 
 //div container in which to place the etch a sketch grid tiles
 const gridContainer = document.createElement('div');
-gridContainer.classList.add('grid_container');
+gridContainer.classList.add('gridContainer');
 const body = document.querySelector('#bod');
 
 //adds the grid container to the body
@@ -12,6 +12,9 @@ const header = document.querySelector('header');
 
 const title = document.createElement('div');
 title.innerHTML = "ETCH-A-SKETCH";
+title.style.textAlign = 'center';
+
+const squareDivs = document.getElementsByClassName('squareDiv'); 
 
 
 header.appendChild(title);
@@ -32,15 +35,35 @@ function userPrompt(){
     return 
 };
 function gridCreator(gridLength){
+    //this accounts for making the a square divs worth of elements
+    //length of 3 would mean 9 total div elements to be created
     let gridSquare = gridLength * gridLength;
+    
     for( let n = 0; n < gridSquare; n++){
         let newSquareDiv = document.createElement('div');
-        newSquareDiv.classList.add('square-div');
+        newSquareDiv.classList.add('squareDiv');
+        newSquareDiv.innerHTML = "";
         gridContainer.appendChild(newSquareDiv);
 
         
 
 
+    }
+    let height = 100 * (1 / gridLength);
+    gridContainer.style.display = 'grid';
+    gridContainer.style.gridTemplateColumns = `repeat(${gridLength}, 25vh)`;
+    gridContainer.style.backgroundColor = 'blue';
+    gridContainer.style.gridRowGap = '5px';
+    gridContainer.style.gridColumnGap = '50px';
+    
+    for(let n = 0; n < squareDivs.length; n++){
+        squareDivs[n].style.display = 'inline';
+        squareDivs[n].style.height = `${height}vh`;
+        squareDivs[n].style.width = `${height}vh`;
+        squareDivs[n].style.color = 'red';
+        squareDivs[n].style.alignCContent = 'center';
+       
+        
     }
 
 
