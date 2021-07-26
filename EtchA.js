@@ -5,6 +5,7 @@ const gridContainer = document.createElement('div');
 gridContainer.classList.add('gridContainer');
 const body = document.querySelector('#bod');
 body.style.width = "100%";
+body.style.height = "50%";
 body.style.position = "relative";
 body.style.backgroundColor = "blue";
 
@@ -33,7 +34,7 @@ function userPrompt(){
     let n;
     while(n != 1){
         userGridResponse = prompt("Grid Side Length (1-10):");
-        if(userGridResponse >= 1 && userGridResponse <= 10){
+        if(userGridResponse >= 1 && userGridResponse <= 100){
             n = 1;
         }
         else{
@@ -61,9 +62,10 @@ function gridCreator(gridLength){
 
 
     }
-    let height = 100 * (1 / gridLength);
+    let height = 90 * (1 / gridLength);
     gridContainer.style.display = 'grid';
     gridContainer.style.width = "100%";
+    gridContainer.style.height = "100%";
     gridContainer.style.gridTemplateColumns = `repeat(${gridLength}, ${height}vh )`;
     gridContainer.style.backgroundColor = 'blue';
     gridContainer.style.gridRowGap = '0px';
@@ -89,18 +91,37 @@ function gridCreator(gridLength){
         
     }
     //selects all of the squarediv class for event listeners
+    //this one changes the color of the tile when hovering
     const allSquareDivs = [...document.querySelectorAll(".squareDiv")];
-    allSquareDivs.forEach((squareDiv) => {
+  /*  allSquareDivs.forEach((squareDiv) => {
         squareDiv.addEventListener("mouseout", function() {
-          squareDiv.style.backgroundColor = "red";
+            //potential statement if click event is active
+            if(squareDiv.style.backgroundColor == "green"){
+                
+            }
+          else {squareDiv.style.backgroundColor = "red";
+        }
         })
-      })
-    
+      })*/
+    //this reverses the change back to the original color 
     allSquareDivs.forEach((squareDiv) => {
         squareDiv.addEventListener("mouseover", function() {
-          squareDiv.style.backgroundColor = "yellow";
+            //potential statement if click event is active
+            if(squareDiv.style.backgroundColor == "green"){
+                
+            }
+            else{
+                squareDiv.style.backgroundColor = "yellow";
+            }
         })
       })
+      //potential click event
+     /* allSquareDivs.forEach((squareDiv) => {
+        squareDiv.addEventListener("click", function() {
+            
+          squareDiv.style.backgroundColor = "green";
+        })
+      })*/
      
 
 
