@@ -4,20 +4,28 @@
 const gridContainer = document.createElement('div');
 gridContainer.classList.add('gridContainer');
 const body = document.querySelector('#bod');
+body.style.width = "100%";
+body.style.position = "relative";
+body.style.backgroundColor = "blue";
+
 
 //adds the grid container to the body
 body.appendChild(gridContainer);
 
-const header = document.querySelector('header');
+
 
 const title = document.createElement('div');
 title.innerHTML = "ETCH-A-SKETCH";
 title.style.textAlign = 'center';
+title.style.fontSize = "40px";
+title.style.color = "white";
+
+//container for the title 
+const header = document.querySelector('header');
+header.appendChild(title);
+header.style.position = "relative";
 
 const squareDivs = document.getElementsByClassName('squareDiv'); 
-
-
-header.appendChild(title);
 
 let userGridResponse;
 //function to prompt the user for how large they'd like the grid to be
@@ -34,6 +42,10 @@ function userPrompt(){
     }
     return 
 };
+function hoverEffect(){
+        newSquareDiv.style.backgroundColor = "yellow";
+
+     };
 function gridCreator(gridLength){
     //this accounts for making the a square divs worth of elements
     //length of 3 would mean 9 total div elements to be created
@@ -51,20 +63,45 @@ function gridCreator(gridLength){
     }
     let height = 100 * (1 / gridLength);
     gridContainer.style.display = 'grid';
-    gridContainer.style.gridTemplateColumns = `repeat(${gridLength}, 25vh)`;
+    gridContainer.style.width = "100%";
+    gridContainer.style.gridTemplateColumns = `repeat(${gridLength}, ${height}vh )`;
     gridContainer.style.backgroundColor = 'blue';
-    gridContainer.style.gridRowGap = '5px';
-    gridContainer.style.gridColumnGap = '50px';
+    gridContainer.style.gridRowGap = '0px';
+    gridContainer.style.justifyContent = "center";
     
+     
+
+
+
+    
+
+     
+
     for(let n = 0; n < squareDivs.length; n++){
         squareDivs[n].style.display = 'inline';
         squareDivs[n].style.height = `${height}vh`;
         squareDivs[n].style.width = `${height}vh`;
         squareDivs[n].style.color = 'red';
-        squareDivs[n].style.alignCContent = 'center';
+        squareDivs[n].style.alignContent = 'center';
+        
+
        
         
     }
+    //selects all of the squarediv class for event listeners
+    const allSquareDivs = [...document.querySelectorAll(".squareDiv")];
+    allSquareDivs.forEach((squareDiv) => {
+        squareDiv.addEventListener("mouseout", function() {
+          squareDiv.style.backgroundColor = "red";
+        })
+      })
+    
+    allSquareDivs.forEach((squareDiv) => {
+        squareDiv.addEventListener("mouseover", function() {
+          squareDiv.style.backgroundColor = "yellow";
+        })
+      })
+     
 
 
 
