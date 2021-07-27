@@ -9,9 +9,17 @@ body.style.height = "50%";
 body.style.position = "relative";
 body.style.backgroundColor = "blue";
 
+//this color is referenced multiple times throughout
+let startingColor = "red";
+
 
 //adds the grid container to the body
 body.appendChild(gridContainer);
+
+
+
+
+
 
 
 
@@ -33,7 +41,7 @@ let userGridResponse;
 function userPrompt(){
     let n;
     while(n != 1){
-        userGridResponse = prompt("Grid Side Length (1-10):");
+        userGridResponse = prompt("Grid Side Length (1-100):");
         if(userGridResponse >= 1 && userGridResponse <= 100){
             n = 1;
         }
@@ -48,6 +56,7 @@ function hoverEffect(){
 
      };
 function gridCreator(gridLength){
+  
     //this accounts for making the a square divs worth of elements
     //length of 3 would mean 9 total div elements to be created
     let gridSquare = gridLength * gridLength;
@@ -83,7 +92,7 @@ function gridCreator(gridLength){
         squareDivs[n].style.display = 'inline';
         squareDivs[n].style.height = `${height}vh`;
         squareDivs[n].style.width = `${height}vh`;
-        squareDivs[n].style.color = 'red';
+        squareDivs[n].style.color = startingColor;
         squareDivs[n].style.alignContent = 'center';
         
 
@@ -99,7 +108,7 @@ function gridCreator(gridLength){
             if(squareDiv.style.backgroundColor == "green"){
                 
             }
-          else {squareDiv.style.backgroundColor = "red";
+          else {squareDiv.style.backgroundColor = startingColor;
         }
         })
       })*/
@@ -122,12 +131,52 @@ function gridCreator(gridLength){
           squareDiv.style.backgroundColor = "green";
         })
       })*/
+
+    
+
+      
+
+
      
 
 
-
+      
 };
+
+
+
+
 userPrompt();
 gridCreator(userGridResponse);
+
+
+
+const resetButton = document.createElement('button');
+resetButton.type = "button";
+resetButton.textContent = "Reset Etch-A-Sketch";
+resetButton.style.position = "absolute";
+resetButton.style.left = "46.9%";
+resetButton.style.textAlign = "center";
+resetButton.classList.add('buttonReset');
+body.appendChild(resetButton);
+resetButton.addEventListener("click", resetB);
+
+
+
+
+ function resetB(){
+  let oldSquares = document.getElementsByClassName("squareDiv");
+
+    while(oldSquares.length > 0){
+        gridContainer.removeChild(oldSquares[0]);
+    }
+
+  userPrompt();
+  gridCreator(userGridResponse)
+ 
+
+};
+
+
 
 
